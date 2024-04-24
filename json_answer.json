@@ -1,0 +1,20 @@
+{
+  "questions": [
+    {
+      "question": "hi",
+      "answer": "Hallo"
+    },
+    {
+      "question": "wich game shoud i play?",
+      "answer": "You shoud play Overwatch!"
+    },
+    {
+      "question": "wich game",
+      "answer": "You shoud play Overwatch!"
+    },
+    {
+      "question": "thank you!",
+      "answer": "always happy to help"
+    }
+  ]
+}
