@@ -1,6 +1,6 @@
 from difflib import get_close_matches
 import json
-
+import random
 
 def load_knwoledge_base(file_path: str) -> dict:
     # to read the json file
@@ -34,7 +34,7 @@ def chat_bot():
     knowledge_base: dict = load_knwoledge_base("json_answer.json")
 
     while True:
-        user_input: str = input("You ")
+        user_input: str = input("You ").lower()
 
         if user_input.lower()=="quit":
             break
