@@ -1,22 +1,28 @@
 {
   "Intents": [
       {
-          "tag": "Grüßen",
-          "patterns": ["Hi", "Moin"],
-          "responses": ["Hallo", "Schön, dich wiederzusehen", "Hallo, wie kann ich helfen?", "Moin"],
+          "tag": "lol",
+          "patterns": ["lol"],
+          "responses": ["lol"],
           "context": [""]
       },
       {
-          "tag": "Auf Wiedersehen",
-          "patterns": ["Tschüss", "Bis später", "Auf Wiedersehen", "Nettes Gespräch, tschüss", "Bis zum nächsten Mal"],
+          "tag": "auf wiedersehen",
+          "patterns": ["tschüss", "bis später", "auf wiedersehen", "nettes gespräch, tschüss", "bis zum nächsten mal"],
           "responses": ["Wir sehen uns!", "Einen schönen Tag", "Tschüss! Kommen Sie bald wieder."],
           "context": [""]
       },
       {
-          "tag": "Danke",
-          "patterns": ["Danke", "Das ist hilfreich", "Super, danke", "Danke, dass du mir geholfen hast"],
+          "tag": "danke",
+          "patterns": ["danke", "das ist hilfreich", "super, danke", "danke, dass du mir geholfen hast"],
           "responses": ["Gern geschehen!", "Bitte schön!", "Kein Problem!"],
           "context": [""]
-      }
+      },
+      {
+        "tag": "moin",
+        "patterns": ["hi", "moin", "gutentag", "hey"],
+        "responses": ["Hallo", "Schön, dich wiederzusehen", "Hallo, wie kann ich helfen?", "Moin"],
+        "context": [""]
+    }
   ]
 }

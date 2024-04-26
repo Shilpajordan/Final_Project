@@ -9,7 +9,9 @@ def load_knowledge_base(file_path: str) -> dict:
 
 def find_best_match(user_question: str, intents: list[str]) -> str | None:
     matches = [(get_close_matches(user_question, pattern, n=1, cutoff=0.6), tag) for tag, pattern in intents.items()]
+    #n=1 only 1 matches, cutoff=0.6 is 60%. its search in the pattern for the best match
     best_match = max(matches, key=lambda x: x[0], default=(None, None))
+    #choise the best match tuple for the search
     return best_match[1] if best_match[0] else None
 
 def get_answer_for_question(question: str, json_answer: dict) -> str | None:
@@ -24,9 +26,10 @@ def get_answer_for_question(question: str, json_answer: dict) -> str | None:
 def chat_bot():
     knowledge_base: dict = load_knowledge_base("intents.json")
     intents = {intent['tag']: intent['patterns'] for intent in knowledge_base['Intents']}
+    #saving tag and patterns as a dictionary
 
     while True:
-        user_input: str = input("You: ")
+        user_input: str = input("You: ").lower()
 
         if user_input == "quiet":
             break
