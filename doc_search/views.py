@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-from .forms import LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .models import Doctor
+from .forms import LoginForm
 
 
 def home(request):
@@ -11,7 +12,8 @@ def home(request):
 
 @login_required
 def ov_appoint(request):
-    return render(request, 'doc_search/ov_appoint.html')
+    doctors = Doctor.objects.all()
+    return render(request, 'doc_search/ov_appoint.html', {"doctors": doctors})
 
 
 def user_login(request):
