@@ -1,22 +1,22 @@
 {
-    "Intents": [
+  "Intents": [
       {
-        "tag": "sickness_options",
-        "patterns": ["hi", "hello", "hey"],
-        "responses": ["Hallo", "Schön, dich wiederzusehen", "Hallo, wie kann ich helfen?", "Moin"],
-        "context": [""]
+          "tag": "Grüßen",
+          "patterns": ["Hi", "Moin"],
+          "responses": ["Hallo", "Schön, dich wiederzusehen", "Hallo, wie kann ich helfen?", "Moin"],
+          "context": [""]
       },
       {
-        "tag": "Auf Wiedersehen",
-        "patterns": ["Tschüss", "Bis später", "Auf Wiedersehen", "Nettes Gespräch, tschüss", "Bis zum nächsten Mal"],
-        "responses": ["Wir sehen uns!", "Einen schönen Tag", "Tschüss! Kommen Sie bald wieder."],
-        "context": [""]
+          "tag": "Auf Wiedersehen",
+          "patterns": ["Tschüss", "Bis später", "Auf Wiedersehen", "Nettes Gespräch, tschüss", "Bis zum nächsten Mal"],
+          "responses": ["Wir sehen uns!", "Einen schönen Tag", "Tschüss! Kommen Sie bald wieder."],
+          "context": [""]
       },
       {
-        "tag": "Danke",
-        "patterns": ["Danke", "Das ist hilfreich", "Super, danke", "Danke, dass du mir geholfen hast"],
-        "responses": ["Gern geschehen!", "Bitte schön!", "Kein Problem!"],
-        "context": [""]
+          "tag": "Danke",
+          "patterns": ["Danke", "Das ist hilfreich", "Super, danke", "Danke, dass du mir geholfen hast"],
+          "responses": ["Gern geschehen!", "Bitte schön!", "Kein Problem!"],
+          "context": [""]
       }
-    ]
-  }
+  ]
+}
