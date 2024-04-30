@@ -19,8 +19,8 @@
           "context": [""]
       },
       {
-        "tag": "moin",
-        "patterns": ["hi", "moin", "gutentag", "hey"],
+        "tag": "hi",
+        "patterns": ["hi", "gutentag", "hey"],
         "responses": ["Hallo", "Schön, dich wiederzusehen", "Hallo, wie kann ich helfen?", "Moin"],
         "context": [""]
     }
