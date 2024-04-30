@@ -52,8 +52,6 @@ class Doctor(models.Model):
     consultation_hours = models.CharField(max_length=50, null=False)
     floor_location = models.CharField(max_length=50, choices=FLOOR_CHOICES, null=False, default="Floor 1")
     room_location = models.CharField(max_length=50, choices=ROOM_CHOICES, null=False, default="Room 1")
-    # start_hour = models.TimeField(default=datetime.time(16, 00))
-    # end_hour = models.TimeField(default=datetime.time(16, 00))
 
 
 class BusinessHours(models.Model):
@@ -71,6 +69,8 @@ class BusinessHours(models.Model):
     
     class Meta:
         ordering = ['id',]
+        verbose_name = "Business Hour"
+        verbose_name_plural = "Business Hours"
 
 
 class Appointment(models.Model):

@@ -9,9 +9,3 @@ admin.site.register(Appointment)
 @admin.register(BusinessHours)
 class BusinessHoursAdmin(admin.ModelAdmin):
     list_display = ('weekday', 'start_hour', 'end_hour',)
-    # list_display_links = ('start_hour', 'end_hour')
-    # fieldsets = [
-    #     ('Hours', {
-    #         'fields': ('start_hour', 'end_hour',)
-    #     }),
-    # ]
