@@ -39,12 +39,6 @@ class Doctor(models.Model):
         ('F3', 'Floor 3'),
         ('F4', 'Floor 4')
     ]
-    FLOOR_CHOICES = [
-        ('F1', 'Floor 1'),
-        ('F2', 'Floor 2'),
-        ('F3', 'Floor 3'),
-        ('F4', 'Floor 4')
-    ]
     ROOM_CHOICES = [
         ('R1', 'Room 1'),
         ('R2', 'Room 2'),
