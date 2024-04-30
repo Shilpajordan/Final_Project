@@ -47,11 +47,14 @@ class Doctor(models.Model):
     ]
     first_name = models.CharField(max_length=50, null=False)
     last_name = models.CharField(max_length=50, null=False)
-    location = models.CharField(max_length=50, null=False)
+    location = models.CharField(max_length=50, null=True, blank=True)
     specialization = models.CharField(max_length=50, choices=SPEZ_CHOICES, null=False)
-    consultation_hours = models.CharField(max_length=50, null=False)
+    consultation_hours = models.CharField(max_length=50, null=True, blank=True)
     floor_location = models.CharField(max_length=50, choices=FLOOR_CHOICES, null=False, default="Floor 1")
     room_location = models.CharField(max_length=50, choices=ROOM_CHOICES, null=False, default="Room 1")
+
+    class Meta:
+        ordering = ['specialization', 'first_name', 'last_name',]
 
 
 class BusinessHours(models.Model):
