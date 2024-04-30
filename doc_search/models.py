@@ -1,5 +1,5 @@
 from django.db import models
-import datetime
+# import datetime
 
 
 class Patient(models.Model):
@@ -66,7 +66,7 @@ class BusinessHours(models.Model):
     weekday = models.CharField(max_length=50, choices=DAY_CHOICES, null=False)
     start_hour = models.TimeField()
     end_hour = models.TimeField()
-    
+
     class Meta:
         ordering = ['id',]
         verbose_name = "Business Hour"
