@@ -56,6 +56,23 @@ class Doctor(models.Model):
     # end_hour = models.TimeField(default=datetime.time(16, 00))
 
 
+class BusinessHours(models.Model):
+    DAY_CHOICES = [
+        ('Mon', 'Monday'),
+        ('Tue', 'Tuesday'),
+        ('Wed', 'Wednesday'),
+        ('Thu', 'Thursday'),
+        ('Fri', 'Friday'),
+        ('Sat', 'Saturday'),
+    ]
+    weekday = models.CharField(max_length=50, choices=DAY_CHOICES, null=False)
+    start_hour = models.TimeField()
+    end_hour = models.TimeField()
+    
+    class Meta:
+        ordering = ['id',]
+
+
 class Appointment(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
