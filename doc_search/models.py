@@ -22,6 +22,9 @@ class Patient(models.Model):
     insurance = models.CharField(max_length=50, null=False)
     complaint = models.CharField(max_length=50, choices=CHOICES, null=False)
 
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
 
 class Doctor(models.Model):
     SPEZ_CHOICES = [
@@ -56,6 +59,9 @@ class Doctor(models.Model):
     class Meta:
         ordering = ['specialization', 'first_name', 'last_name',]
 
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} - {self.specialization}"
+
 
 class BusinessHours(models.Model):
     DAY_CHOICES = [
@@ -80,4 +86,4 @@ class Appointment(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     date = models.DateTimeField()
-    time = models.TimeField()
+    time = models.TimeField(null=True, blank=True)

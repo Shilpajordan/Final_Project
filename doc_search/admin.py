@@ -2,8 +2,9 @@ from django.contrib import admin
 from doc_search.models import Patient, Doctor, BusinessHours, Appointment
 
 
-admin.site.register(Patient)
-admin.site.register(Appointment)
+@admin.register(Patient)
+class PatientAdmin(admin.ModelAdmin):
+    list_display = ('first_name', 'last_name', 'age', 'gender', 'email', 'insurance', 'complaint',)
 
 
 @admin.register(BusinessHours)
@@ -20,3 +21,8 @@ class DoctorAdmin(admin.ModelAdmin):
             'fields': ('first_name', 'last_name', 'specialization', 'floor_location', 'room_location',)
         })
     ]
+
+
+@admin.register(Appointment)
+class AppointmentAdmin(admin.ModelAdmin):
+    list_display = ('patient', 'doctor', 'date',)
