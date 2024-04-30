@@ -52,7 +52,9 @@ class Doctor(models.Model):
     consultation_hours = models.CharField(max_length=50, null=False)
     floor_location = models.CharField(max_length=50, choices=FLOOR_CHOICES, null=False, default="Floor 1")
     room_location = models.CharField(max_length=50, choices=ROOM_CHOICES, null=False, default="Room 1")
-
+    
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
 
 class BusinessHours(models.Model):
     DAY_CHOICES = [
@@ -73,8 +75,16 @@ class BusinessHours(models.Model):
         verbose_name_plural = "Business Hours"
 
 
+# class Appointment(models.Model):
+#     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+#     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
+#     date = models.DateTimeField()
+#     time = models.TimeField()
 class Appointment(models.Model):
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+
+    #patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    patient_id = models.CharField(max_length=50)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     date = models.DateTimeField()
-    time = models.TimeField()
+    #time = models.TimeField()
+    
