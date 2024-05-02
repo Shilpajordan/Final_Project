@@ -87,3 +87,6 @@ class Appointment(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     date = models.DateTimeField()
     time = models.TimeField(null=True, blank=True)
+
+    class Meta:
+        ordering = ['date',]
