@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Termine</title>
+</head>
+<body>
+    <h1>Termine</h1>
+    <ul>
+        {% for appointment in appointments %}
+            <li>{{ appointment.doctor }} - {{ appointment.start_time }} bis {{ appointment.end_time }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

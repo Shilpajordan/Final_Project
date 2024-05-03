@@ -44,6 +44,7 @@ class Appointment(models.Model):
 
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
-    date = models.DateTimeField()
-    time = models.TimeField()
+    title = models.CharField(max_length=100)
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
     

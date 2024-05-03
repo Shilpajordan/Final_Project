@@ -1,0 +1,17 @@
+# Python Bytecode
+__pycache__/
+*.pyc
+
+# Virtual Environment
+.venv/
+
+# IDE
+.idea/
+.vscode/
+
+# Django migrations
+*/migrations/
+
+# System files
+.DS_Store
+Thumbs.db

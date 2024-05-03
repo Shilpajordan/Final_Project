@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Termin hinzufügen</title>
+</head>
+<body>
+    <h1>Termin hinzufügen</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Termin hinzufügen</button>
+    </form>
+    {% if form.errors %}
+        <p>{{ form.errors }}</p>
+    {% endif %}
+</body>
+</html>

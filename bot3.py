@@ -31,7 +31,7 @@ def chat_bot():
     while True:
         user_input: str = input("You: ").lower()
 
-        if user_input == "quiet":
+        if user_input == "quit":
             break
 
         best_match: str | None = find_best_match(user_input, intents)

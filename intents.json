@@ -20,9 +20,70 @@
       },
       {
         "tag": "hi",
-        "patterns": ["hi", "gutentag", "hey"],
+        "patterns": ["hi", "gutentag", "hey", "hallo"],
         "responses": ["Hallo", "Schön, dich wiederzusehen", "Hallo, wie kann ich helfen?", "Moin"],
         "context": [""]
+    },
+    {     
+        "tag": "Do you have toothache?",
+        "patterns": ["Do you have toothache? Do you have unbearable and severe toothache?"],
+        "responses": ["If yes, please refe to the dentist or emergency."],
+        "context": [""]
+    },
+    {
+        "tag": "Do you have body ache?",
+        "patterns": ["Do you have body ache? Do you have body ache with fever, cough and sore throat?"],
+        "responses": ["If Yes, please refer to the GP or Internist."],
+        "context": [""]
+    },
+    {
+        "tag": "Do you have cough?",
+        "patterns": ["Do you have cough? Do you have cough with sputum and difficulty in breathing?"],
+        "responses": ["If Yes, please refer to the GP, Internist or Pulmonolgist"],
+        "context": [""]
+    },
+    {
+        "tag": "Do you have joint pain?",
+        "patterns": ["Do you have joint pain? Do you have unbearable and severe joint pain?"],
+        "responses": ["If Yes, please refer to the orthopedics or emergency."],
+        "context": [""]
+    },
+    {
+        "tag": "Do you have chest pain?",
+        "patterns": ["Do you have chest pain? Do you have chest pain with history of hypertensn and diffculty in breathing?"],
+        "responses": ["If Yes, please refer to the cardiologist, emergency or internist."],
+        "context": [""]
+    },
+    {
+        "tag": "Do you have menstrual pain?",
+        "patterns": ["Do you have menstrual pain? Do you have unbearable and severe pain related to your peiods?"],
+        "responses": ["If Yes, please refer to the gynecologist, emergency or internist."],
+        "context": [""]
+    },
+    {
+        "tag": "Do you have fever?",
+        "patterns": ["Do you have fever? Do you feel or have high-grade fever?"],
+        "responses": ["If Yes, please refer to the GP, internst or emergency."],
+        "context": [""]
+    },
+    {
+        "tag": "insult",
+        "patterns": ["you suck", "you're terrible", "you're useless", "insult"],
+        "responses": ["I'm sorry to hear that.", "I'll try to do better.", "Please be polite."],
+        "context": [""]
+      },
+      {
+        "tag": "compliment",
+        "patterns": ["you're great", "you're amazing", "well done", "compliment"],
+        "responses": ["Thank you!", "That means a lot!", "I appreciate the compliment!"],
+        "context": [""]
+      },
+      {
+        "tag": "help",
+        "patterns": ["help", "how can you help", "what can you do"],
+        "responses": ["I can assist you with various topics. Just ask me anything!", "I'm here to help. What do you need?", "I can provide information and support. Feel free to ask!"],
+        "context": [""]
+      }   
+    ]
     }
-  ]
-}
+  
