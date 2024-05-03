@@ -7,17 +7,17 @@ class LoginForm(forms.Form):
 
 
 from .models import Appointment, Doctor, TimeSlot
-# SPEZ_CHOICES = [
-#     ('GP', 'General Practitioner'),
-#     ('IM', 'Internal Medicine'),
-#     ('ORTH', 'Orthopedic'),
-#     ('CARD', 'Cardiologist'),
-#     ('DENT', 'Dentist'),
-#     ('GYN', 'Gynecologist'),
-#     ('PUL', 'Pulmonologist')
-# ]
+SPEZ_CHOICES = [
+    ('GP', 'General Practitioner'),
+    ('IM', 'Internal Medicine'),
+    ('ORTH', 'Orthopedic'),
+    ('CARD', 'Cardiologist'),
+    ('DENT', 'Dentist'),
+    ('GYN', 'Gynecologist'),
+    ('PUL', 'Pulmonologist')
+]
 class AppointmentBookingForm(forms.ModelForm):
-    # specialisation = forms.ChoiceField(choices=SPEZ_CHOICES, widget=forms.Select(attrs={'class': 'form-control'}))
+    specialisation = forms.ChoiceField(choices=SPEZ_CHOICES, widget=forms.Select(attrs={'class': 'form-control'}))
     doctor = forms.ModelChoiceField(queryset=Doctor.objects.all())
     date = forms.ChoiceField(choices=[], widget=forms.Select(attrs={'class': 'form-control'}))
     patient_firstname = forms.CharField(max_length=100)  # Add patient name field
@@ -42,6 +42,6 @@ class AppointmentBookingForm(forms.ModelForm):
         return [(str(time_slot.start_time), str(time_slot)) for time_slot in TimeSlot.objects.all()]
     class Meta:
         model = Appointment
-        fields = ["date", "doctor"]  # Assuming 'doctor' and 'patient' fields are set automatically
+        exclude = ["patient_id"]  # Assuming 'doctor' and 'patient' fields are set automatically
 
 
