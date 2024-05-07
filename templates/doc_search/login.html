@@ -1,0 +1,32 @@
+{% extends 'base_internal.html' %}
+{% load static %}
+
+{% block title %} login {% endblock %}
+
+{% block content %}
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Login</h2>
+          <ol>
+            <li><a href="{% url 'doc_search:home' %}">Home</a></li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs Section -->
+
+    <section class="inner-page">
+      <div class="container">
+        <p>
+          Login page for doctors
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Login</button>
+          </form>
+        </p>
+      </div>
+    </section>
+{% endblock %}
