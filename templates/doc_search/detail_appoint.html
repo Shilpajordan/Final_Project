@@ -10,7 +10,7 @@
         <div class="d-flex justify-content-between align-items-center">
           <h2>Appointment details</h2>
           <ol>
-            <li><a href="{% url 'doc_search:user_logout' %}">Logout</a><br></li>
+            <li><a href="{% url 'doc_search:ov_appoint' %}">Back</a><br></li>
           </ol>
         </div>
 
@@ -19,14 +19,12 @@
 
     <section class="inner-page">
       <div class="container">
-        {% for patient in patients %}
-                Name: {{ patient.first_name }} {{ patient.last_name }}</br>
-                Age: {{ patient.age }}</br>
-                Gender: {{ patient.gender }}</br>
-                Email: {{ patient.email }}</br>
-                Insurance: {{ patient.insurance }}</br>
-                Complaint: {{ patient.complaint }}</br></br>
-        {% endfor %}
+                Name: {{ patients.first_name }} {{ patients.last_name }}</br>
+                Age: {{ patients.age }}</br>
+                Gender: {{ patients.gender }}</br>
+                Email: {{ patients.email }}</br>
+                Insurance: {{ patients.insurance }}</br>
+                Complaint: {{ patients.complaint }}</br></br>
       </div>
     </section>
 {% endblock %}

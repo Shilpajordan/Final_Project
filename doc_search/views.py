@@ -19,8 +19,9 @@ def ov_appoint(request):
 
 # TODO filter patients, add url, create html, link
 @login_required
-def detail_appoint(request):
-    patients = Patient.objects.all()
+def detail_appoint(request, patient_id):
+    patients = Patient.objects.get(id=patient_id)
+    # patients = Patient.objects.all()
     return render(request, 'doc_search/detail_appoint.html', {"patients": patients})
 
 
