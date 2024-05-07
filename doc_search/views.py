@@ -11,19 +11,19 @@ def home(request):
 
 
 @login_required
-def ov_appoint(request, doc_id):
+def ov_appoint(request):
     doctors = Doctor.objects.all()
     appointments = []
-    print("doc_id:", type(doc_id))
+    # print("doc_id:", type(doc_id))
 
     doc_sel = request.GET.get('doc_sel')
 
-    print("doc_sel:", type(doc_sel))
+    # print("doc_sel:", type(doc_sel))
 
     if doc_sel:
-        if doc_id == doc_sel:
-            appointments = Appointment.objects.all()
-            appointments = appointments.filter(doctor=doc_sel)
+        # if doc_id == doc_sel:
+        appointments = Appointment.objects.all()
+        appointments = appointments.filter(doctor=doc_sel)
 
     return render(request, 'doc_search/ov_appoint.html', {"doctors": doctors, "appointments": appointments})
 
@@ -40,11 +40,12 @@ def user_login(request):
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            doc_id = "1"
+            # doc_id = "1"
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('doc_search:ov_appoint', doc_id=doc_id)
+                # return redirect('doc_search:ov_appoint', doc_id=doc_id)
+                return redirect('doc_search:ov_appoint')
             else:
                 messages.error(request, 'Invalid username or password')
 
