@@ -1752,8 +1752,8 @@ section {
   text-decoration: none;
 }
 
-select{
+/* select{
   text-align-last:right;
   padding-right: 29px;
   direction: rtl;
-}
+} */
