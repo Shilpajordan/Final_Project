@@ -19,6 +19,16 @@
 
     <section class="inner-page">
       <div class="container">
+        <label for="doc_sel">Select a doctor</label>
+          <select name="doc_sel" id="doc_sel">
+              <option value="">---</option>
+              {% for doctor in doctors %}
+              <option value="{{ doctor }}">{{ doctor }}</option>
+              {% endfor %}
+          </select>
+
+        </br></br></br>
+
         {% for appointment in appointments %}
             <li>
                 Patient: <a href="{% url 'doc_search:detail_appoint' appointment.id %}">{{ appointment.patient }}</a></br>
