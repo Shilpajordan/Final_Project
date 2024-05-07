@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Appointment details {% endblock %}
+
+{% block content %}
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Appointment details</h2>
+          <ol>
+            <li><a href="{% url 'doc_search:ov_appoint' %}">Back</a><br></li>
+          </ol>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="inner-page">
+      <div class="container">
+                Name: {{ patients.first_name }} {{ patients.last_name }}</br>
+                Age: {{ patients.age }}</br>
+                Gender: {{ patients.gender }}</br>
+                Email: {{ patients.email }}</br>
+                Insurance: {{ patients.insurance }}</br>
+                Complaint: {{ patients.complaint }}</br></br>
+      </div>
+    </section>
+{% endblock %}

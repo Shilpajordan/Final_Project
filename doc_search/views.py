@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Doctor
+from .models import Doctor, Appointment, Patient
 from .forms import LoginForm
 
 
@@ -13,7 +13,16 @@ def home(request):
 @login_required
 def ov_appoint(request):
     doctors = Doctor.objects.all()
-    return render(request, 'doc_search/ov_appoint.html', {"doctors": doctors})
+    appointments = Appointment.objects.all()
+    return render(request, 'doc_search/ov_appoint.html', {"doctors": doctors, "appointments": appointments})
+
+
+# TODO filter patients, add url, create html, link
+@login_required
+def detail_appoint(request, patient_id):
+    patients = Patient.objects.get(id=patient_id)
+    # patients = Patient.objects.all()
+    return render(request, 'doc_search/detail_appoint.html', {"patients": patients})
 
 
 def user_login(request):

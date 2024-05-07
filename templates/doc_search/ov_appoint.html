@@ -1,14 +1,14 @@
-{% extends 'base_internal.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
-{% block title %} login {% endblock %}
+{% block title %} Appointments {% endblock %}
 
 {% block content %}
     <section class="breadcrumbs">
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>You are logged in</h2>
+          <h2>Appointments</h2>
           <ol>
             <li><a href="{% url 'doc_search:user_logout' %}">Logout</a><br></li>
           </ol>
@@ -19,9 +19,23 @@
 
     <section class="inner-page">
       <div class="container">
-        <p>
-          You are logged in
-        </p>
+        <label for="doc_sel">Select a doctor</label>
+          <select name="doc_sel" id="doc_sel">
+              <option value="">---</option>
+              {% for doctor in doctors %}
+              <option value="{{ doctor }}">{{ doctor }}</option>
+              {% endfor %}
+          </select>
+
+        </br></br></br>
+
+        {% for appointment in appointments %}
+            <li>
+                Patient: <a href="{% url 'doc_search:detail_appoint' appointment.id %}">{{ appointment.patient }}</a></br>
+                Doctor: {{ appointment.doctor }}</br>
+                Appointment: {{ appointment.date|date:"d M Y - H:i" }}</br></br>
+            </li>
+        {% endfor %}
       </div>
     </section>
 {% endblock %}
