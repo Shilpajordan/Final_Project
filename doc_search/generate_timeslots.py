@@ -30,3 +30,9 @@ end_datetime = start_datetime + timedelta(hours=9)  # End time for time slots
 duration = 30  # Duration of each time slot in minutes
 
 generate_time_slots(doctor, start_datetime, end_datetime, duration)
+
+doctor = Doctor.objects.get(pk=2) 
+generate_time_slots(doctor, start_datetime, end_datetime, duration)
+
+doctor = Doctor.objects.get(pk=3) 
+generate_time_slots(doctor, start_datetime, end_datetime, duration)

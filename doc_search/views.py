@@ -77,7 +77,7 @@ def book_appointment(request):
             return render(request, 'doc_search/appointment_confirmation.html', {'appointment': appointment})
     else:
         form = AppointmentBookingForm()
-    return render(request, 'doc_search/book_appointment.html', {'my_form': form})
+    return render(request, 'doc_search/book_appintment.html', {'my_form': form})
 
 from .models import TimeSlot
 
@@ -90,8 +90,6 @@ def remove_time_slot(doctor, start_time):
     # Remove the time slot for the given doctor and date
     if is_time_slot_available(doctor, start_time):
         end_time = start_time + timedelta(minutes=30)
-        print(start_time)
-        print(end_time)
         #TimeSlot.objects.filter(doctor=doctor, start_time__date=start_time,end_time__date=end_time).delete()
         try:
             time_slot = TimeSlot.objects.get(doctor=doctor, start_time=start_time, end_time=end_time)
@@ -100,3 +98,45 @@ def remove_time_slot(doctor, start_time):
             # Handle the case where the time slot doesn't exist
             pass
 
+from django.http import JsonResponse
+from .models import Doctor
+
+def get_doctors(request):
+    specialization = request.GET.get('specialization')
+    doctors = Doctor.objects.filter(specialization=specialization).values('id', 'first_name','last_name')
+    print(doctors)
+    #doctor_dict = {doctor.id: f"{doctor.first_name} {doctor.last_name}" for doctor in doctors}
+    # Assuming doctors is your queryset result
+    doctors_dict = {}
+    for doctor in doctors:
+        # Extract values from each doctor dictionary
+        doctor_id = doctor['id']
+        first_name = doctor['first_name']
+        last_name = doctor['last_name']
+        
+        # Construct a new dictionary entry with doctor id as key and other details as value
+        doctors_dict[doctor_id] =  first_name+ " " + last_name
+
+    # Now doctors_dict should contain the data in the format you want
+
+    return JsonResponse(doctors_dict)
+
+def get_timeSlots(request):
+    doctor = request.GET.get('doctor')
+    timeslot = TimeSlot.objects.filter(doctor=doctor).values('id','start_time','end_time')
+    print(timeslot)
+    #doctor_dict = {doctor.id: f"{doctor.first_name} {doctor.last_name}" for doctor in doctors}
+    # Assuming doctors is your queryset result
+    timeslot_dict = {}
+    for doctor in timeslot:
+        # Extract values from each doctor dictionary
+        doctor_id = doctor['id']
+        start_time = doctor['start_time']
+        end_time = doctor['end_time']
+        
+        # Construct a new dictionary entry with doctor id as key and other details as value
+        timeslot_dict[doctor_id] =  str(start_time)+ " " + str(end_time)
+
+    # Now doctors_dict should contain the data in the format you want
+
+    return JsonResponse(timeslot_dict)

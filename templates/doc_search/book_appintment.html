@@ -1,0 +1,49 @@
+<!-- book_appointment.html -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<form method="post">
+    {% csrf_token %}
+    {{ my_form.as_p }}
+    <button type="submit">Book Appointment</button>
+</form>
+<script>
+    // Assuming you're using jQuery for simplicity
+    $('#id_specialization').on('change', function() {
+        var specialization = $(this).val();
+        $.ajax({
+            url: '/get_doctors/',  // Endpoint to fetch doctors with the selected specialisation
+            type: 'GET',
+            data: {
+                'specialization': specialization
+            },
+            success: function(data) {
+                // Clear existing options
+                $('#id_doctor').empty();
+                // Add new options based on fetched data
+                $('#id_doctor').append($('<option></option>').attr('value', '').text('Please select a doctor'));
+                $.each(data, function(key, value) {
+                    $('#id_doctor').append($('<option></option>').attr('value', key).text(value));
+                });
+            }
+        });
+    });
+
+    $('#id_doctor').on('change', function() {
+        var doctor = $(this).val();
+        $.ajax({
+            url: '/get_timeSlots/',  // Endpoint to fetch doctors with the selected specialisation
+            type: 'GET',
+            data: {
+                'doctor': doctor
+            },
+            success: function(data) {
+                // Clear existing options
+                $('#id_date').empty();
+                // Add new options based on fetched data
+                $.each(data, function(key, value) {
+                    $('#id_date').append($('<option></option>').attr('value', key).text(value));
+                });
+            }
+        });
+    });
+</script>
