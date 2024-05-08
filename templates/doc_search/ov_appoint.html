@@ -36,7 +36,7 @@
 
         {% for appointment in appointments %}
             <li>
-                Patient: <a href="{% url 'doc_search:detail_appoint' appointment.id %}">{{ appointment.patient }}</a></br>
+                Patient: <a href="{% url 'doc_search:detail_appoint' appointment.patient.id %}">{{ appointment.patient }}</a></br>
                 Doctor: {{ appointment.doctor }}</br>
                 Appointment: {{ appointment.date|date:"d M Y - H:i" }}</br></br>
             </li>
