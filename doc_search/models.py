@@ -2,8 +2,6 @@ from django.db import models
 import datetime
 
 
-# Create your models here.
-
 class Patient(models.Model):
     CHOICES = [
         ('headache', 'Headache'),
@@ -23,7 +21,6 @@ class Patient(models.Model):
     email = models.EmailField(null =False)
     insurance = models.CharField(max_length=50, null =True)
     complaint = models.CharField(max_length=50, choices=CHOICES, null =True)
-
 
 
 class Doctor(models.Model):
@@ -46,13 +43,9 @@ class Doctor(models.Model):
         return f"{self.first_name} {self.last_name}"
 
 class Appointment(models.Model):
-
-    #patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     patient_id = models.CharField(max_length=50)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     date = models.DateTimeField()
-    #time = models.TimeField()
-    
 
 
 class TimeSlot(models.Model):
@@ -61,6 +54,6 @@ class TimeSlot(models.Model):
     end_time = models.DateTimeField()
 
     def __str__(self):
-        return f"Time Slot for {self.doctor} - {self.start_time.strftime('%Y-%m-%d %H:%M')} to {self.end_time.strftime('%Y-%m-%d %H:%M')}"
-
+        start_time_formatted = self.start_time.strftime('%Y-%m-%d %H:%M')
+        return f"{start_time_formatted}"
 

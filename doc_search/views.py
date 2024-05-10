@@ -64,20 +64,15 @@ def book_appointment(request):
                 patient_email = form.cleaned_data['patient_email']
                 patient = Patient.objects.create(first_name=patient_firstname,last_name=patient_lastname,age=patient_age, gender=patient_gender, email=patient_email)
             appointment.patient_id = patient.pk
-             # Convert date string to datetime object
-            # date_str = '2024/05/01 09:30'  # Example date string
-            # appointment.date = datetime.strptime(date_str, '%Y/%m/%d %H:%M')
-            date_str =  datetime.strptime(form.cleaned_data['date'], '%Y-%m-%d %H:%M:%S%z')
-            appointment.date = date_str  # Adjust the format as needed
+            appointment.date = form.cleaned_data['date']
             appointment.save()
+            remove_time_slot(appointment.doctor, datetime.strptime(appointment.date, "%Y-%m-%d %H:%M"))
 
             doctor = form.cleaned_data['doctor']
-            #date = '2024/05/01 09:30' #form.cleaned_data['date'].strftime('%Y-%m-%d %H:%M:%S')
-            remove_time_slot(doctor, date_str)
             return render(request, 'doc_search/appointment_confirmation.html', {'appointment': appointment})
     else:
         form = AppointmentBookingForm()
-    return render(request, 'doc_search/book_appintment.html', {'my_form': form})
+    return render(request, 'doc_search/book_appointment.html', {'my_form': form})
 
 from .models import TimeSlot
 
@@ -90,7 +85,6 @@ def remove_time_slot(doctor, start_time):
     # Remove the time slot for the given doctor and date
     if is_time_slot_available(doctor, start_time):
         end_time = start_time + timedelta(minutes=30)
-        #TimeSlot.objects.filter(doctor=doctor, start_time__date=start_time,end_time__date=end_time).delete()
         try:
             time_slot = TimeSlot.objects.get(doctor=doctor, start_time=start_time, end_time=end_time)
             time_slot.delete()
@@ -104,8 +98,6 @@ from .models import Doctor
 def get_doctors(request):
     specialization = request.GET.get('specialization')
     doctors = Doctor.objects.filter(specialization=specialization).values('id', 'first_name','last_name')
-    print(doctors)
-    #doctor_dict = {doctor.id: f"{doctor.first_name} {doctor.last_name}" for doctor in doctors}
     # Assuming doctors is your queryset result
     doctors_dict = {}
     for doctor in doctors:
@@ -124,19 +116,14 @@ def get_doctors(request):
 def get_timeSlots(request):
     doctor = request.GET.get('doctor')
     timeslot = TimeSlot.objects.filter(doctor=doctor).values('id','start_time','end_time')
-    print(timeslot)
-    #doctor_dict = {doctor.id: f"{doctor.first_name} {doctor.last_name}" for doctor in doctors}
     # Assuming doctors is your queryset result
     timeslot_dict = {}
     for doctor in timeslot:
         # Extract values from each doctor dictionary
         doctor_id = doctor['id']
-        start_time = doctor['start_time']
-        end_time = doctor['end_time']
-        
+        start_time = doctor['start_time'].strftime('%Y-%m-%d %H:%M')
+
         # Construct a new dictionary entry with doctor id as key and other details as value
-        timeslot_dict[doctor_id] =  str(start_time)+ " " + str(end_time)
-
+        timeslot_dict[doctor_id] =  str(start_time)
     # Now doctors_dict should contain the data in the format you want
-
     return JsonResponse(timeslot_dict)

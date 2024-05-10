@@ -40,8 +40,9 @@
                 // Clear existing options
                 $('#id_date').empty();
                 // Add new options based on fetched data
+                $('#id_date').append($('<option></option>').attr('value', '').text('Please selete appintment date & time'));
                 $.each(data, function(key, value) {
-                    $('#id_date').append($('<option></option>').attr('value', key).text(value));
+                    $('#id_date').append($('<option></option>').attr('value', value).text(value));
                 });
             }
         });
