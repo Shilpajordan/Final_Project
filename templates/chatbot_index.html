@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Chatbot</title>
+    <style>
+ 
+        #chat-popup {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            height: auto;
+            max-height: 400px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 9999; 
+            overflow-y: auto;
+        }
+        .chat-history {
+            padding: 10px;
+        }
+        .user-input {
+            padding: 10px;
+            border-top: 1px solid #ccc;
+        }
+
+        .chat-button {
+            padding: 5px;
+            background-color: #ccc;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="chat-popup" style="display: none;">
+        <div id="minimize-button-container">
+            <button id="minimize-button" class="chat-button" onclick="toggleChat()">Minimize</button>
+        </div>
+        <div class="chat-history" id="chat-history">
+            
+        </div>
+        <div class="user-input">
+            <form id="chat-form" method="POST">
+                {% csrf_token %}
+                <input type="text" name="user_input" placeholder="Ask me anything...">
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        
+        function openChat() {
+            document.getElementById('chat-popup').style.display = 'block';
+        }
+
+        function closeChat() {
+            document.getElementById('chat-popup').style.display = 'none';
+        }
+
+        
+        function toggleChat() {
+            const chatPopup = document.getElementById('chat-popup');
+            const minimizeButton = document.getElementById('minimize-button');
+            if (chatPopup.style.height === 'auto') {
+                chatPopup.style.height = '40px'; 
+                minimizeButton.textContent = 'Maximize';
+            } else {
+                chatPopup.style.height = 'auto'; 
+                minimizeButton.textContent = 'Minimize';
+            }
+        }
+
+
+        window.addEventListener('load', openChat);
+
+
+        const chatHistory = document.getElementById('chat-history');
+        const chatForm = document.getElementById('chat-form');
+
+        chatForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const formData = new FormData(chatForm);
+            const userInput = formData.get('user_input');
+
+
+            const userMessage = document.createElement('div');
+            userMessage.textContent = `You: ${userInput}`;
+            chatHistory.appendChild(userMessage);
+
+
+            fetch('/chatbot/', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(text => {
+
+                const botMessage = document.createElement('div');
+                botMessage.textContent = `Bot: ${text}`;
+                chatHistory.appendChild(botMessage);
+
+
+                chatHistory.scrollTop = chatHistory.scrollHeight;
+            });
+
+
+            chatForm.reset();
+        });
+    </script>
+</body>
+</html>
+
+
