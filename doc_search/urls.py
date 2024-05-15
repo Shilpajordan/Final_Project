@@ -13,3 +13,4 @@ urlpatterns = [
     path('get_doctors/', get_doctors, name='get_doctors'),
     path('get_timeSlots/', get_timeSlots, name='get_timeSlots'),
 ]
+
