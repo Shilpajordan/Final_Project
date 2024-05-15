@@ -127,3 +127,4 @@ def get_timeSlots(request):
         timeslot_dict[doctor_id] =  str(start_time)
     # Now doctors_dict should contain the data in the format you want
     return JsonResponse(timeslot_dict)
+
