@@ -1,0 +1,95 @@
+{
+    "Intents": [
+    {
+    "tag": "lol",
+    "patterns": ["lol"],
+    "responses": ["lol"],
+    "context": [""]
+    },
+    {
+    "tag": "auf wiedersehen",
+    "patterns": ["tschüss", "bis später", "auf wiedersehen", "nettes gespräch, tschüss", "bis zum nächsten mal", "bey", "see you later","Goodbye", "nice conversation, goodbye", "see you next time"],
+    "responses": ["See you!", "Have a nice day", "Bye! Come back soon"],
+    "context": [""]
+    },
+    {
+    "tag": "danke",
+    "patterns": ["danke", "das ist hilfreich", "super, danke", "danke, dass du mir geholfen hast", "Thank you!", "that is helpful", "great thank you", "thanks for your help"],
+    "responses": ["You're welcome!", "Please!", "No problem"],
+    "context": [""]
+    },
+    {
+    "tag": "hi",
+    "patterns": ["hi", "gutentag", "hey", "hallo", "Good day"],
+    "responses": ["Hallo", "Nice to see you", "Hallo, how can i help you"],
+    "context": [""]
+    },
+    {
+    "tag": "I have toothache",
+    "patterns": ["I have toothache”,”I have unbearable and severe toothache", "pain in my tooth" ,"toothache"],
+    "responses": ["You should make an appointment with a Dentist"],
+    "context": [""]
+    },
+    {
+    "tag": "I have body ache",
+    "patterns": ["I have body ache”, “ have body ache with fever”, “cough and sore throat", "fever","I have fever","body pain","body"],
+    "responses": ["You should make an appointment with a Dentist GP or Internist"],
+    "context": [""]
+    },
+    {
+    "tag": "I have cough",
+    "patterns": ["I have cough”, “I have cough with sputum and difficulty in breathing","cough"],
+    "responses": [" You should make an appointment with a GP, Internist or Pulmonolgist"],
+    "context": [""]
+    },
+    {
+    "tag": "I have joint pain",
+    "patterns": ["I have joint pain","I have unbearable and severe joint pain","knee pain","joint pain"],
+    "responses": ["You should make an appointment with a orthopedic or emergency."],
+    "context": [""]
+    },
+    {
+    "tag": "I have chest pain",
+    "patterns": ["I have chest pain”, “I have chest pain with history of hypertension and diffculty in breathing","chest pain"],
+    "responses": [" You should make an appointment with a cardiologist, emergency or internist."],
+    "context": [""]
+    },
+    {
+    "tag": "gynecology",
+    "patterns": ["I have menstrual pain”, “I have unbearable and severe pain related to your peiods","gynecology consultation","pregnancy","girls’ consultation","female checkup","gynecology"],
+    "responses": [" You should make an appointment with a gynecologist"],
+    "context": [""]
+    },
+    {
+    "tag": "I have fever",
+    "patterns": ["I have fever”,” feel or have high-grade fever","high temperature","sneezing","fever"],
+    "responses": ["You should make an appointment with a General Practitioner."],
+    "context": [""]
+    },
+    {
+    "tag": "insult",
+    "patterns": ["you suck", "you're terrible", "you're useless", "insult"],
+    "responses": ["I'm sorry to hear that.", "I'll try to do better.", "Please be polite."],
+    "context": [""]
+    },
+    {
+    "tag": "compliment",
+    "patterns": ["you're great", "you're amazing", "well done", "compliment"],
+    "responses": ["Thank you!", "That means a lot!", "I appreciate the compliment!"],
+    "context": [""]
+    },
+    {
+    "tag": "help",
+    "patterns": ["help", "how can you help", "what can you do"],
+    "responses": ["I can assist you with various topics. Just ask me anything!", "I'm here to help. What do you need?", "I can provide information and support. Feel free to ask!"],
+    "context": [""]
+    },
+    {
+    "tag": "doctors",
+    "patterns": ["doctors", "which doctor is here?", "what kind of doctor have you?", "i want a apointement with a doctor" ],
+    "responses": ["If you want to know our doctors information just write, show doctors"],
+    "context": [""]
+    }
+    ]
+    }
+    

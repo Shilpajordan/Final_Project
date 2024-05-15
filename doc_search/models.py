@@ -1,5 +1,5 @@
 from django.db import models
-# import datetime
+import datetime
 
 
 class Patient(models.Model):
@@ -90,3 +90,12 @@ class Appointment(models.Model):
 
     class Meta:
         ordering = ['date',]
+
+class TimeSlot(models.Model):
+    doctor = models.ForeignKey('Doctor', on_delete=models.CASCADE)
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
+
+    def __str__(self):
+        start_time_formatted = self.start_time.strftime('%Y-%m-%d %H:%M')
+        return f"{start_time_formatted}"
