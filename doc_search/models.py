@@ -33,6 +33,7 @@ class Doctor(models.Model):
         ('GYN', 'Gynecologist'),
         ('PUL', 'Pulmonologist')
     ]
+    
      FLOOR_CHOICES = [
         ('F1', 'Floor 1'),
         ('F2', 'Floor 2'),
