@@ -9,3 +9,4 @@ admin.site.register(TimeSlot)
 @admin.register(BusinessHours)
 class BusinessHoursAdmin(admin.ModelAdmin):
     list_display = ('weekday', 'start_hour', 'end_hour')
+
