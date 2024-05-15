@@ -36,3 +36,4 @@ generate_time_slots(doctor, start_datetime, end_datetime, duration)
 
 doctor = Doctor.objects.get(pk=3) 
 generate_time_slots(doctor, start_datetime, end_datetime, duration)
+
