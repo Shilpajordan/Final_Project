@@ -58,6 +58,7 @@ class AppointmentBookingForm(forms.ModelForm):
         model = Appointment
         exclude = ["patient_id"] 
         fields = ['specialization', 'doctor', 'date', 'patient_firstname', 'patient_lastname', 'patient_age', 'patient_gender', 'patient_email']
+        
 
 
 
