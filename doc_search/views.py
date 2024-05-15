@@ -30,7 +30,6 @@ def ov_appoint(request):
 
 @login_required
 def detail_appoint(request, patient_id):
-    print(patient_id)
     patients = Patient.objects.get(id=patient_id)
     return render(request, 'doc_search/detail_appoint.html', {"patients": patients})
 
