@@ -128,3 +128,4 @@ def get_timeSlots(request):
     # Now doctors_dict should contain the data in the format you want
     return JsonResponse(timeslot_dict)
 
+
