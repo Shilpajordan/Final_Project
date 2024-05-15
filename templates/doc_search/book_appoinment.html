@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Appointment</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    form {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
+  <!-- Include jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  
+</head>
+<body>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="container">
+        <div class="form-group">
+            <label for="specialization"></label>
+            {{ my_form.specialization }}
+        </div>
+        <div class="form-group">
+            <label for="doctor"></label>
+            {{ my_form.doctor }}
+        </div>
+        <div class="form-group">
+            <label for="date"></label>
+            {{ my_form.date }}
+        </div>
+        <div class="form-group">
+            <label for="patient_firstname"></label>
+            {{ my_form.patient_firstname }}
+        </div>
+        <div class="form-group">
+            <label for="patient_firstname"></label>
+            {{ my_form.patient_lastname }}
+        </div>
+        <div class="form-group">
+            <label for="patient_firstname"></label>
+            {{ my_form.patient_age }}
+        </div>
+        <div class="form-group">
+            <label for="patient_firstname"></label>
+            {{ my_form.patient_gender }}
+        </div>
+        <div class="form-group">
+            <label for="patient_email"></label>
+            {{ my_form.patient_email }}
+        </div>
+        <button type="submit" class="btn btn-primary">Book Appointment</button>
+    </div>
+</form>
+<script>
+    $(document).ready(function() {
+        $('#id_specialization').on('change', function() {
+            var specialization = $(this).val();
+            $.ajax({
+                url: '/get_doctors/',
+                type: 'GET',
+                data: {
+                    'specialization': specialization
+                },
+                success: function(data) {
+                    $('#id_doctor').empty();
+                    $('#id_doctor').append($('<option></option>').attr('value', '').text('Please select a doctor'));
+                    $.each(data, function(key, value) {
+                        $('#id_doctor').append($('<option></option>').attr('value', key).text(value));
+                    });
+                }
+            });
+        });
+
+        $('#id_doctor').on('change', function() {
+            var doctor = $(this).val();
+            $.ajax({
+                url: '/get_timeSlots/',
+                type: 'GET',
+                data: {
+                    'doctor': doctor
+                },
+                success: function(data) {
+                    $('#id_date').empty();
+                    $('#id_date').append($('<option></option>').attr('value', '').text('Please select appointment date & time'));
+                    $.each(data, function(key, value) {
+                        $('#id_date').append($('<option></option>').attr('value', value).text(value));
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
