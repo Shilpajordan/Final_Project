@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.core.mail import send_mail
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -7,6 +8,8 @@ from .forms import LoginForm
 from .forms import AppointmentBookingForm
 from datetime import datetime
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
 
 
 
@@ -147,3 +150,33 @@ def get_timeSlots(request):
         timeslot_dict[doctor_id] =  str(start_time)
     # Now doctors_dict should contain the data in the format you want
     return JsonResponse(timeslot_dict)
+
+
+
+@csrf_exempt
+def contact_view(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+
+        if not name or not email or not subject or not message:
+            return JsonResponse({'status': 'error', 'message': 'Please fill in all fields.'}, status=400)
+
+        try:
+            # Include sender's email in the message body
+            message_with_email = f"Sender's Email: {email}\n\n{message}"
+            
+            send_mail(
+                subject=f"New contact from {name}: {subject}",
+                message=message_with_email,
+                from_email=email,
+                recipient_list=[settings.EMAIL_HOST_USER],
+                fail_silently=False,
+            )
+            return JsonResponse({'status': 'success', 'message': 'Thank you! Your message has been sent.'})
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+
+    return render(request, 'index.html', {'name'})

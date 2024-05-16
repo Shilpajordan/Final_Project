@@ -113,16 +113,50 @@
   <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
   <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
-  <script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
+  {% comment %} <script src="{% static 'vendor/php-email-form/validate.js' %}"></script> {% endcomment %}
 
   <script src="{% static 'js/main.js' %}"></script>
-
+  
 
   <br>
   <h2>Chatbot</h2>
   {% include 'chatbot_index.html' %}
 
+{% comment %} contact form submission  {% endcomment %}
+  <script>
+    // JavaScript code to handle form submission and response
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('.php-email-form');
 
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+            const response = await fetch('/contact/', {
+                method: 'POST',
+                body: formData
+            });
+
+            const responseData = await response.json();
+
+            if (responseData.status === 'success') {
+                // Display success message
+                const successMessage = document.querySelector('.sent-message');
+                successMessage.style.display = 'block';
+                successMessage.textContent = responseData.message;
+
+                // Optionally, clear form fields
+                form.reset();
+            } else {
+                // Display error message
+                const errorMessage = document.querySelector('.error-message');
+                errorMessage.style.display = 'block';
+                errorMessage.textContent = 'An error occurred: ' + responseData.message;
+            }
+        });
+    });
+  </script>
+{% comment %} end contact form submission {% endcomment %}
 
 
 </body>
