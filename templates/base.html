@@ -70,8 +70,10 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      {% comment %} <a href="#appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Make an</span> Appointment</a> {% endcomment %}
-      <a href="/book" class="appointment-btn scrollto"><span class="d-none d-md-inline">Make an</span> Appointment</a>
+      {% comment %} <a href="#appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Make an</span> Appointment</a>   {% endcomment %}
+      <a href="book" class="appointment-btn scrollto"><span class="d-none d-md-inline">Make an</span> Appointment</a>
+    
+      {% comment %} <a href="{% url 'doc_search:user_logout' %}">Logout</a> {% endcomment %}
 
     </div>
   </header><!-- End Header -->

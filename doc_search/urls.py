@@ -11,7 +11,7 @@ urlpatterns = [
     path("ov_appoint/", views.ov_appoint, name="ov_appoint"),
     # path("ov_appoint/<str:doc_id>/", views.ov_appoint, name="ov_appoint"),
     path("detail_appoint/<int:patient_id>/", views.detail_appoint, name="detail_appoint"),
-    path('book/', book_appointment, name='book_appointment'),
+    path('book/', views.book_appointment, name='book_appointment'),
     path('get_doctors/', get_doctors, name='get_doctors'),
     path('get_timeSlots/', get_timeSlots, name='get_timeSlots'),
 ]

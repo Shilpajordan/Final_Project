@@ -93,7 +93,7 @@ def book_appointment(request):
             return render(request, 'doc_search/appointment_confirmation.html', {'appointment': appointment})
     else:
         form = AppointmentBookingForm()
-    return render(request, 'doc_search/book_appointment.html', {'my_form': form})
+    return render(request, 'doc_search/book_appointment.html', {'form': form})
 
 
 
