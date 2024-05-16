@@ -19,16 +19,27 @@ def home(request):
 def ov_appoint(request):
     doctors = Doctor.objects.all()
     appointments = []
-    # print("doc_id:", type(doc_id))
+    current_time = datetime.now()
+    print("current time:", current_time)
 
     doc_sel = request.GET.get('doc_sel')
 
-    # print("doc_sel:", type(doc_sel))
-
     if doc_sel:
-        # if doc_id == doc_sel:
         appointments = Appointment.objects.all()
         appointments = appointments.filter(doctor=doc_sel)
+        # WIP
+        for appointment in appointments:
+            print("dates of appointments:", appointment.date)
+            # if appointment.date < current_time:   # cant compare
+            # appointments.remove(appointment)    # 'QuerySet' object has no attribute 'remove'
+        
+            # Post.objects.filter(pub_date__gt=datetime.now()).delete()
+        
+        
+        # instance = Appointment.objects.values('date')[0:]
+        # print("bla 2", instance)
+        # print("xxx", appointments.datetimes)
+        # end WIP
 
     return render(request, 'doc_search/ov_appoint.html', {"doctors": doctors, "appointments": appointments})
 
