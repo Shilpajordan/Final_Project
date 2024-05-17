@@ -26,19 +26,19 @@
     },
     {
     "tag": "I have toothache",
-    "patterns": ["I have toothache”,”I have unbearable and severe toothache", "pain in my tooth" ,"toothache"],
+    "patterns": ["I have toothache","I have unbearable and severe toothache", "pain in my tooth" ,"toothache"],
     "responses": ["You should make an appointment with a Dentist"],
     "context": [""]
     },
     {
     "tag": "I have body ache",
-    "patterns": ["I have body ache”, “ have body ache with fever”, “cough and sore throat", "fever","I have fever","body pain","body"],
+    "patterns": ["I have body ache", "have body ache with fever", "cough and sore throat", "fever","I have fever","body pain","body"],
     "responses": ["You should make an appointment with a Dentist GP or Internist"],
     "context": [""]
     },
     {
     "tag": "I have cough",
-    "patterns": ["I have cough”, “I have cough with sputum and difficulty in breathing","cough"],
+    "patterns": ["I have cough", "I have cough with sputum and difficulty in breathing","cough"],
     "responses": [" You should make an appointment with a GP, Internist or Pulmonolgist"],
     "context": [""]
     },
@@ -50,19 +50,19 @@
     },
     {
     "tag": "I have chest pain",
-    "patterns": ["I have chest pain”, “I have chest pain with history of hypertension and diffculty in breathing","chest pain"],
+    "patterns": ["I have chest pain", "I have chest pain with history of hypertension and diffculty in breathing","chest pain"],
     "responses": [" You should make an appointment with a cardiologist, emergency or internist."],
     "context": [""]
     },
     {
     "tag": "gynecology",
-    "patterns": ["I have menstrual pain”, “I have unbearable and severe pain related to your peiods","gynecology consultation","pregnancy","girls’ consultation","female checkup","gynecology"],
+    "patterns": ["I have menstrual pain", "I have unbearable and severe pain related to your peiods","gynecology consultation","pregnancy","girls’ consultation","female checkup","gynecology"],
     "responses": [" You should make an appointment with a gynecologist"],
     "context": [""]
     },
     {
     "tag": "I have fever",
-    "patterns": ["I have fever”,” feel or have high-grade fever","high temperature","sneezing","fever"],
+    "patterns": ["I have fever"," feel or have high-grade fever","high temperature","sneezing","fever" ],
     "responses": ["You should make an appointment with a General Practitioner."],
     "context": [""]
     },
@@ -88,6 +88,18 @@
     "tag": "doctors",
     "patterns": ["doctors", "which doctor is here?", "what kind of doctor have you?", "i want a apointement with a doctor" ],
     "responses": ["If you want to know our doctors information just write, show doctors"],
+    "context": [""]
+    }, 
+    {
+    "tag": "pain",
+    "patterns": ["pain", "it´s hurts"],
+    "responses": [" What kind of pain do you have?."],
+    "context": [""]
+    },
+    {
+    "tag": "emergency",
+    "patterns": ["emergency", "Urge to speak to a doctor"],
+    "responses": ["If it´s an emergency call this number 231 2165445, to get help"],
     "context": [""]
     }
     ]
