@@ -134,6 +134,6 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'shilpa.nair@dci-student.org'
-EMAIL_HOST_PASSWORD = 'xvuzusvokzebrdzu'
-DEFAULT_FROM_EMAIL = 'shilpa.nair@dci-student.org'
+EMAIL_HOST_PASSWORD = ''
+#DEFAULT_FROM_EMAIL = 'shilpa.nair@dci-student.org'
 
