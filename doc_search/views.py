@@ -171,7 +171,7 @@ def contact_view(request):
             send_mail(
                 subject=f"New contact from {name}: {subject}",
                 message=message_with_email,
-                from_email=email,
+                from_email=settings.DEFAULT_FROM_EMAIL, 
                 recipient_list=[settings.EMAIL_HOST_USER],
                 fail_silently=False,
             )
