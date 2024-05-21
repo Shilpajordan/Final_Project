@@ -19,21 +19,28 @@
 
     <section class="inner-page">
       <div class="container">
+      
+      <form method="get" action="">
+
+        {% csrf_token %}
         <label for="doc_sel">Select a doctor</label>
-          <select name="doc_sel" id="doc_sel">
+        <select name="doc_sel" id="doc_sel">
               <option value="">---</option>
               {% for doctor in doctors %}
-              <option value="{{ doctor }}">{{ doctor }}</option>
+              <option value="{{ doctor.id }}">{{ doctor }}</option>
               {% endfor %}
-          </select>
-
+        </select>
+        <button type="submit">Search</button>
+      </form>
         </br></br></br>
-
+        
         {% for appointment in appointments %}
             <li>
-                Patient: <a href="{% url 'doc_search:detail_appoint' appointment.id %}">{{ appointment.patient }}</a></br>
+                <b>{{ appointment.date|date:"d M Y - H:i" }}</b></br>
+                Patient: <a href="{% url 'doc_search:detail_appoint' appointment.patient.id %}">{{ appointment.patient }}</a></br>
                 Doctor: {{ appointment.doctor }}</br>
-                Appointment: {{ appointment.date|date:"d M Y - H:i" }}</br></br>
+                <hr />
+                
             </li>
         {% endfor %}
       </div>
