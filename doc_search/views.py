@@ -9,70 +9,65 @@ from datetime import datetime
 from django.http import JsonResponse
 
 
-
-
+# display the landing page
 def home(request):
     return render(request, 'doc_search/index.html')
 
 
+# list all booked appointments after login
 @login_required
 def ov_appoint(request):
     doctors = Doctor.objects.all()
     appointments = []
-    current_time = datetime.now()
-    print("current time:", current_time)
 
+    # check if a specific doctor got selected
     doc_sel = request.GET.get('doc_sel')
-
+    # filter appointments if a specific doctor got selected
     if doc_sel:
         appointments = Appointment.objects.all()
         appointments = appointments.filter(doctor=doc_sel)
-        # WIP
-        for appointment in appointments:
-            print("dates of appointments:", appointment.date)
-            # if appointment.date < current_time:   # cant compare
-            # appointments.remove(appointment)    # 'QuerySet' object has no attribute 'remove'
-        
-            # Post.objects.filter(pub_date__gt=datetime.now()).delete()
-        
-        
-        # instance = Appointment.objects.values('date')[0:]
-        # print("bla 2", instance)
-        # print("xxx", appointments.datetimes)
-        # end WIP
 
     return render(request, 'doc_search/ov_appoint.html', {"doctors": doctors, "appointments": appointments})
 
 
+# list patient data of a specific appointment
 @login_required
 def detail_appoint(request, patient_id):
+    # get data of specific patient
     patients = Patient.objects.get(id=patient_id)
     return render(request, 'doc_search/detail_appoint.html', {"patients": patients})
 
 
+# login for staff members to access appointments and patient data
 def user_login(request):
+    # check if something is posted
     if request.method == 'POST':
         form = LoginForm(request.POST)
+        # check if data entered is correct
         if form.is_valid():
+            # read data entered and clean it
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            # doc_id = "1"
+            # check if entered data matches with existing user
             user = authenticate(request, username=username, password=password)
+            # if user is authenticated login and redirect to appointment overview
             if user is not None:
                 login(request, user)
-                # return redirect('doc_search:ov_appoint', doc_id=doc_id)
                 return redirect('doc_search:ov_appoint')
             else:
                 messages.error(request, 'Invalid username or password')
 
+    # display empty login form
     else:
         form = LoginForm()
     return render(request, 'doc_search/login.html', {'form': form})
 
 
+# logout from restricted area
 def user_logout(request):
     logout(request)
     return redirect('doc_search:login')
+
 
 def book_appointment(request):
     if request.method == 'POST':

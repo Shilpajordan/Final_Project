@@ -6,9 +6,14 @@ admin.site.register(Patient)
 admin.site.register(Doctor)
 admin.site.register(Appointment)
 admin.site.register(TimeSlot)
+
+
 @admin.register(BusinessHours)
 class BusinessHoursAdmin(admin.ModelAdmin):
     list_display = ('weekday', 'start_hour', 'end_hour')
+
+
+# More organized admin panel
 
 # from django.contrib import admin
 # from doc_search.models import Patient, Doctor, BusinessHours, Appointment
@@ -17,11 +22,6 @@ class BusinessHoursAdmin(admin.ModelAdmin):
 # @admin.register(Patient)
 # class PatientAdmin(admin.ModelAdmin):
 #     list_display = ('first_name', 'last_name', 'age', 'gender', 'email', 'insurance', 'complaint',)
-
-
-# @admin.register(BusinessHours)
-# class BusinessHoursAdmin(admin.ModelAdmin):
-#     list_display = ('weekday', 'start_hour', 'end_hour',)
 
 
 # @admin.register(Doctor)
