@@ -46,7 +46,10 @@ def chat_bot(user_input):
 
     
     user_input = user_input.strip().lower()  
-    
+    print(f"User input: {user_input}")
+
+
+
     if waiting_for_feedback:
         return collect_feedback(user_input)  # If waiting for feedback, treat the input as feedback
     elif user_input == "give feedback":
@@ -68,3 +71,4 @@ def chat_bot(user_input):
                 return "There are no doctors in the database."
         else:
             return "I don't know. If you want information about our doctors, write 'show doctors'. If you want to give us feedback, write 'give feedback'."
+
