@@ -152,22 +152,28 @@ def get_timeSlots(request):
     return JsonResponse(timeslot_dict)
 
 
+# Contact Form view
 
 @csrf_exempt
+# Adding this  decorator to exempt the view from CSRF verification.
 def contact_view(request):
+    '''Retrieving Form data from the request'''
     if request.method == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
         subject = request.POST.get('subject')
         message = request.POST.get('message')
 
+        '''checking for empty form fields'''
         if not name or not email or not subject or not message:
+            '''Return error if any field left empty'''
             return JsonResponse({'status': 'error', 'message': 'Please fill in all fields.'}, status=400)
 
         try:
-            # Include sender's email in the message body
+            # Adding sender's email in the message body
             message_with_email = f"Sender's Email: {email}\n\n{message}"
             
+            '''sending email with the provided details'''
             send_mail(
                 subject=f"New contact from {name}: {subject}",
                 message=message_with_email,
@@ -175,8 +181,11 @@ def contact_view(request):
                 recipient_list=[settings.EMAIL_HOST_USER],
                 fail_silently=False,
             )
+            '''Returning success message after the mail sent successfully'''
             return JsonResponse({'status': 'success', 'message': 'Thank you! Your message has been sent.'})
         except Exception as e:
+            '''returning error response in case of an exception'''
             return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
 
+    '''render the index.html template if the request method is not POST'''
     return render(request, 'index.html', {'name'})
