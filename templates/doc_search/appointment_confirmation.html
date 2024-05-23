@@ -1,18 +1,46 @@
-<!-- appointment_confirmation.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="refresh" content="3;url=http://localhost:8000/">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Appointment Confirmation</title>
+    {% load static %}
+    <style>
+        body {
+            background-image: url("{% static 'img/hero-bg.jpg' %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .content {
+            background: rgba(255, 255, 255, 0.8); /* Optional: Add a white background with some transparency to make the text more readable */
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 600px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-top: 0;
+        }
+        p {
+            margin: 10px 0;
+        }
+    </style>
 </head>
 <body>
-    <h1>Appointment Confirmation</h1>
-    <p>Your appointment has been successfully booked!</p>
-    <p>Date: {{ appointment.date }}</p>
-    <p>Time: {{ appointment.time }}</p>
-    <p>Doctor: {{ appointment.doctor }}</p>
-    <p>Patient: {{ appointment.patient }}</p>
+    <div class="content">
+        <h1>Appointment Confirmation</h1>
+        <p>Your appointment has been successfully booked!</p>
+        <p>Date: {{ appointment.date }}</p>
+        <p>Time: {{ appointment.time }}</p>
+        <p>Doctor: {{ appointment.doctor }}</p>
+        <p>Patient: {{ appointment.patient }}</p>
+    </div>
 </body>
 </html>
