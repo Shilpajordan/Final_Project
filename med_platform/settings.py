@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'doc_search',
     'rest_framework',
-    'bot'
+    'bot',
+    'apis'
 ]
 
 MIDDLEWARE = [
