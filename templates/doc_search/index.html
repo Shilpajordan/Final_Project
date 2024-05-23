@@ -163,7 +163,7 @@
     </section><!-- End Services Section -->
 
     <!-- ======= Appointment Section ======= -->
-    <section id="appointment" class="appointment section-bg">
+    {% comment %} <section id="appointment" class="appointment section-bg">
       <div class="container">
 
         <div class="section-title">
@@ -224,7 +224,7 @@
         </form>
 
       </div>
-    </section><!-- End Appointment Section -->
+    </section><!-- End Appointment Section --> {% endcomment %}
 
     <!-- ======= Departments Section ======= -->
     <section id="departments" class="departments">
@@ -619,7 +619,8 @@
 
           <div class="col-lg-8 mt-5 mt-lg-0">
 
-            <form action="{% static 'forms/contact.php' %}" method="post" role="form" class="php-email-form">
+            {% comment %} <form action="{% static 'forms/contact.php' %}" method="post" role="form" class="php-email-form">  {% endcomment %}
+            <form action="/contact/" method="post" role="form" class="php-email-form">  
               <div class="row">
                 <div class="col-md-6 form-group">
                   <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
@@ -648,4 +649,7 @@
 
       </div>
     </section><!-- End Contact Section -->
+
+    <h2>Chatbot</h2>
+    {% include 'chatbot_index.html' %}
 {% endblock %}

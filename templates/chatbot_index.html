@@ -3,7 +3,6 @@
 <head>
     <title>My Chatbot</title>
     <style>
- 
         #chat-popup {
             position: fixed;
             bottom: 20px;
@@ -17,9 +16,13 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             z-index: 9999; 
             overflow-y: auto;
+            display: flex;
+            flex-direction: column;
         }
         .chat-history {
             padding: 10px;
+            overflow-y: auto;
+            height: 300px; /* Setzen Sie die Höhe hier ein, um die maximale Höhe des Chatverlaufs festzulegen */
         }
         .user-input {
             padding: 10px;
@@ -33,14 +36,21 @@
             border-radius: 3px;
             cursor: pointer;
         }
+
+        .toggle-button-container {
+            align-self: flex-end;
+            padding: 5px;
+        }
     </style>
 </head>
 <body>
     
     <div id="chat-popup" style="display: none;">
-        <div id="minimize-button-container">
-            <button id="minimize-button" class="chat-button" onclick="toggleChat()">Minimize</button>
+        <!-- Button zum Minimieren des Popups -->
+        <div class="toggle-button-container">
+            <button class="chat-button toggle-button" onclick="toggleChat()" id="popupToggleButton">Mini</button>
         </div>
+        
         <div class="chat-history" id="chat-history">
             
         </div>
@@ -54,7 +64,6 @@
     </div>
 
     <script>
-        
         function openChat() {
             document.getElementById('chat-popup').style.display = 'block';
         }
@@ -63,22 +72,20 @@
             document.getElementById('chat-popup').style.display = 'none';
         }
 
-        
         function toggleChat() {
             const chatPopup = document.getElementById('chat-popup');
-            const minimizeButton = document.getElementById('minimize-button');
+            const popupToggleButton = document.getElementById('popupToggleButton');
+
             if (chatPopup.style.height === 'auto') {
-                chatPopup.style.height = '40px'; 
-                minimizeButton.textContent = 'Maximize';
+                chatPopup.style.height = '40px';
+                popupToggleButton.textContent = 'Maxi';
             } else {
                 chatPopup.style.height = 'auto'; 
-                minimizeButton.textContent = 'Minimize';
+                popupToggleButton.textContent = 'Mini';
             }
         }
 
-
         window.addEventListener('load', openChat);
-
 
         const chatHistory = document.getElementById('chat-history');
         const chatForm = document.getElementById('chat-form');
@@ -88,11 +95,9 @@
             const formData = new FormData(chatForm);
             const userInput = formData.get('user_input');
 
-
             const userMessage = document.createElement('div');
             userMessage.textContent = `You: ${userInput}`;
             chatHistory.appendChild(userMessage);
-
 
             fetch('/chatbot/', {
                 method: 'POST',
@@ -100,20 +105,15 @@
             })
             .then(response => response.text())
             .then(text => {
-
                 const botMessage = document.createElement('div');
                 botMessage.textContent = `Bot: ${text}`;
                 chatHistory.appendChild(botMessage);
 
-
                 chatHistory.scrollTop = chatHistory.scrollHeight;
             });
-
 
             chatForm.reset();
         });
     </script>
 </body>
 </html>
-
-

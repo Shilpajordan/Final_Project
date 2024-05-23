@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.core.mail import send_mail
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -7,6 +8,8 @@ from .forms import LoginForm
 from .forms import AppointmentBookingForm
 from datetime import datetime
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
 
 
 # display the landing page
@@ -153,3 +156,42 @@ def get_timeSlots(request):
         timeslot_dict[doctor_id] =  str(start_time)
     # Now doctors_dict should contain the data in the format you want
     return JsonResponse(timeslot_dict)
+
+
+# Contact Form view
+
+@csrf_exempt
+# Adding this  decorator to exempt the view from CSRF verification.
+def contact_view(request):
+    '''Retrieving Form data from the request'''
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+
+        '''checking for empty form fields'''
+        if not name or not email or not subject or not message:
+            '''Return error if any field left empty'''
+            return JsonResponse({'status': 'error', 'message': 'Please fill in all fields.'}, status=400)
+
+        try:
+            # Adding sender's email in the message body
+            message_with_email = f"Sender's Email: {email}\n\n{message}"
+            
+            '''sending email with the provided details'''
+            send_mail(
+                subject=f"New contact from {name}: {subject}",
+                message=message_with_email,
+                from_email=settings.DEFAULT_FROM_EMAIL, 
+                recipient_list=[settings.EMAIL_HOST_USER],
+                fail_silently=False,
+            )
+            '''Returning success message after the mail sent successfully'''
+            return JsonResponse({'status': 'success', 'message': 'Thank you! Your message has been sent.'})
+        except Exception as e:
+            '''returning error response in case of an exception'''
+            return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+
+    '''render the index.html template if the request method is not POST'''
+    return render(request, 'index.html', {'name'})
