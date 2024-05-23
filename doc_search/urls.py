@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import book_appointment, get_doctors, get_timeSlots,contact_view
+from .views import book_appointment, get_doctors, get_timeSlots, contact_view
 
 app_name = "doc_search"
 
