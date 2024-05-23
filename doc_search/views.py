@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.core.mail import send_mail, EmailMultiAlternatives
 from django.core.mail import send_mail
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -10,6 +11,7 @@ from datetime import datetime
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
+from datetime import timedelta
 
 
 
@@ -92,7 +94,49 @@ def book_appointment(request):
             appointment.save()
             remove_time_slot(appointment.doctor, datetime.strptime(appointment.date, "%Y-%m-%d %H:%M"))
 
-            doctor = form.cleaned_data['doctor']
+                  # Send email confirmation to the patient
+            name = form.cleaned_data['patient_firstname']
+            email = form.cleaned_data['patient_email']
+            subject = "Appointment Confirmation"
+            message = "Hello, Your appointment has been confirmed. Here is the appointment details:\n\n" + f"Doctor: {appointment.doctor}\nDate: {appointment.date}"
+
+            if not name or not email or not subject or not message:
+                return JsonResponse({'status': 'error', 'message': 'Please fill in all fields.'}, status=400)
+
+            try:
+                # Include sender's email in the message body
+                message_with_email = f"""
+                                <html>
+                                    <body>
+                                        <p><strong>Sender's Email:</strong> {email}</p>
+                                        <p>"Hello, Your appointment has been confirmed"</p>
+                                        <p>"Here is the appointment details:\n\n"</p>
+                                        <p> f"Doctor: {appointment.doctor}\nDate: {appointment.date}"</p>
+                                    </body>
+                                </html>
+                                """
+
+                # send_mail(
+                #     subject=f"New contact from {name}: {subject}",
+                #     message=message_with_email,
+                #     from_email=settings.EMAIL_HOST_USER,
+                #     recipient_list=[email],
+                #     fail_silently=False,
+                # )
+                # Create the email
+                email_message = EmailMultiAlternatives(
+                    subject=subject,
+                    body=message_with_email,  # Plain text content
+                    from_email=settings.EMAIL_HOST_USER,
+                    to=[email],
+                )
+
+                # Attach the HTML version
+                email_message.attach_alternative(message_with_email, "text/html")
+                email_message.send()
+                #return JsonResponse({'status': 'success', 'message': 'Thank you! Your message has been sent.'})
+            except Exception as e:
+                return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
             return render(request, 'doc_search/appointment_confirmation.html', {'appointment': appointment})
     else:
         form = AppointmentBookingForm()
@@ -104,7 +148,7 @@ def is_time_slot_available(doctor, date):
     # Check if there are any time slots for the given doctor and date
     return TimeSlot.objects.filter(doctor=doctor, start_time__date=date).exists()
 
-from datetime import timedelta
+
 def remove_time_slot(doctor, start_time):
     # Remove the time slot for the given doctor and date
     if is_time_slot_available(doctor, start_time):
