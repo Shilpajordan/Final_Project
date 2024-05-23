@@ -1,9 +1,11 @@
 from django import forms
 
 
+# simple login form
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
+
 
 from .models import Appointment, Doctor, TimeSlot
 SPEZ_CHOICES = [
