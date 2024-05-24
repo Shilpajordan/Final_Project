@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
-import environ
+
 from dotenv import load_dotenv
 
 
@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'doc_search',
     'rest_framework',
-    'bot'
+    'bot',
+    'apis'
 ]
 
 MIDDLEWARE = [
@@ -101,6 +102,7 @@ DATABASES = {
         "PORT": os.getenv('DB_PORT'),
     }
 }
+
 
 
 # Password validation
