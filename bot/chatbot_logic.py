@@ -1,7 +1,14 @@
 import json
 import random
-import sqlite3
 from difflib import get_close_matches
+import psycopg2
+from psycopg2 import sql
+import os
+from dotenv import load_dotenv
+
+
+# Loading the env
+load_dotenv()
 
 waiting_for_feedback = False
 
@@ -23,15 +30,27 @@ def get_answer_for_question(question: str, json_answer: dict) -> str | None:
 
 def get_all_doctors():
     try:
-        conn = sqlite3.connect('db.sqlite3')
+        # Verbindung zur PostgreSQL-Datenbank herstellen
+        conn = psycopg2.connect(
+            dbname=os.getenv('DB_NAME'),
+            user=os.getenv('DB_USER'),
+            password=os.getenv('DB_PASSWORD'),
+            host=os.getenv('DB_HOST'),
+            port=os.getenv('DB_PORT')
+        )
         cursor = conn.cursor()
+        
         query = "SELECT * FROM doc_search_doctor"
         cursor.execute(query)
         doctors = cursor.fetchall()
+        
+        # Verbindung schließen
+        cursor.close()
         conn.close()
+        
         return doctors
-    except sqlite3.Error as error:
-        print("Error querying SQLite database:", error)
+    except psycopg2.Error as error:
+        print("Error querying PostgreSQL database:", error)
         return None
 
 def collect_feedback(feedback):
@@ -48,15 +67,12 @@ def chat_bot(user_input):
     user_input = user_input.strip().lower()  
     print(f"User input: {user_input}")
 
-
-
     if waiting_for_feedback:
         return collect_feedback(user_input)  # If waiting for feedback, treat the input as feedback
     elif user_input == "give feedback":
         waiting_for_feedback = True
         return "Please write your feedback:"
     
-
     else:
         knowledge_base: dict = load_knowledge_base("intents.json")
         intents = {intent['tag']: intent['patterns'] for intent in knowledge_base['Intents']}
