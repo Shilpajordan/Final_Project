@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 import environ
 from dotenv import load_dotenv
-
+import environ
 
 # Loading the env
 load_dotenv()
