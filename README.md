@@ -23,3 +23,5 @@ with a Doctor from the Database based on their symptoms.
 1. Email confirmation
 2. Email reminders before the day of the appointment 
 3. Project deployment to a cloud provider(AWS)
+
+
