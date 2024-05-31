@@ -91,7 +91,7 @@ class TestChatBot(unittest.TestCase):
             ('John', 'Doe', 'GP'),
             ('Jane', 'Smith', 'GP')
         ]
-        self.assertEqual(chat_bot("show doctors"), "Here are all the doctors: John Doe GP, Jane Smith GP")
+        self.assertEqual(chat_bot("show doctors"), "Here are all the doctors: John Doe (GP), Jane Smith (GP)")
 
         mock_get_all_doctors.return_value = None
         self.assertEqual(chat_bot("show doctors"), "There are no doctors in the database.")

@@ -82,7 +82,7 @@ def chat_bot(user_input):
         elif user_input.lower() == "show doctors":
             all_doctors = get_all_doctors()
             if all_doctors:
-                return "Here are all the doctors: " + ", ".join(f"{doctor[0]} {doctor[1]} {doctor[2]}" for doctor in all_doctors)
+                return "Here are all the doctors: " + ", ".join(f"{doctor[0]} {doctor[1]} ({doctor[2]})" for doctor in all_doctors)
             else:
                 return "There are no doctors in the database."
         else:
