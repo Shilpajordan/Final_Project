@@ -42,7 +42,7 @@ class TestChatBot(unittest.TestCase):
         mock_cursor = mock_conn.cursor.return_value
         # Mock the fetchall method to return a controlled dataset
         mock_cursor.fetchall.return_value = [
-            (1, 'John', 'Doe', 'Osnabrück', 'GP', '09:00 - 17:00', 'F1', 'R1')
+            ('John', 'Doe', 'GP')
         ]
         mock_connect.return_value = mock_conn
 
@@ -51,14 +51,14 @@ class TestChatBot(unittest.TestCase):
         
         # Define the expected result
         expected_doctors = [
-            (1, 'John', 'Doe', 'Osnabrück', 'GP', '09:00 - 17:00', 'F1', 'R1')
+            ('John', 'Doe', 'GP')
         ]
         
         # Assert that the result matches the expected result
         self.assertEqual(doctors, expected_doctors)
 
         # Ensure the correct SQL query was executed
-        mock_cursor.execute.assert_called_once_with("SELECT * FROM doc_search_doctor")
+        mock_cursor.execute.assert_called_once_with("SELECT first_name, last_name, specialization FROM doc_search_doctor")
         # Ensure the connection was closed
         mock_conn.close.assert_called_once()
 
@@ -88,9 +88,10 @@ class TestChatBot(unittest.TestCase):
     @patch("chatbot_logic.get_all_doctors")
     def test_chat_bot_show_doctors(self, mock_get_all_doctors):
         mock_get_all_doctors.return_value = [
-            (1, 'John', 'Doe', 'Osnabrück', 'GP', '09:00 - 17:00', 'F1', 'R1')
+            ('John', 'Doe', 'GP'),
+            ('Jane', 'Smith', 'GP')
         ]
-        self.assertEqual(chat_bot("show doctors"), "Here are all the doctors: (1, 'John', 'Doe', 'Osnabrück', 'GP', '09:00 - 17:00', 'F1', 'R1')")
+        self.assertEqual(chat_bot("show doctors"), "Here are all the doctors: John Doe GP, Jane Smith GP")
 
         mock_get_all_doctors.return_value = None
         self.assertEqual(chat_bot("show doctors"), "There are no doctors in the database.")
