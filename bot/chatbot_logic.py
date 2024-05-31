@@ -30,7 +30,7 @@ def get_answer_for_question(question: str, json_answer: dict) -> str | None:
 
 def get_all_doctors():
     try:
-        # Verbindung zur PostgreSQL-Datenbank herstellen
+        
         conn = psycopg2.connect(
             dbname=os.getenv('DB_NAME'),
             user=os.getenv('DB_USER'),
@@ -40,11 +40,11 @@ def get_all_doctors():
         )
         cursor = conn.cursor()
         
-        query = "SELECT * FROM doc_search_doctor"
+        query = "SELECT first_name, last_name FROM doc_search_doctor"
         cursor.execute(query)
         doctors = cursor.fetchall()
         
-        # Verbindung schließen
+      
         cursor.close()
         conn.close()
         
@@ -82,7 +82,7 @@ def chat_bot(user_input):
         elif user_input.lower() == "show doctors":
             all_doctors = get_all_doctors()
             if all_doctors:
-                return "Here are all the doctors: " + ", ".join(str(doctor) for doctor in all_doctors)
+                return "Here are all the doctors: " + ", ".join(f"{doctor[0]} {doctor[1]}" for doctor in all_doctors)
             else:
                 return "There are no doctors in the database."
         else:
